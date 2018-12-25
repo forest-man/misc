@@ -4,7 +4,7 @@ from multiprocessing import Pool
 from multiprocessing import cpu_count
 import threading
 import logging
-
+# Make load for the 1-st CPU every time
 def f(x):
     try:
         while True:
@@ -15,29 +15,23 @@ def f(x):
 
 
 
-def cpu_eat_all():
+def cpu_eat_all(x):
+
     try:
-        if __name__ == '__main__':
+        if x == 1:
+            processes = 1
+        elif x == 3:
             processes = cpu_count()
-            print('Running load on CPU')
-            print('Utilizing %d core' %processes)
-            procs = range(processes)
-            map_parameters = range(processes) 
-            pool = Pool(processes)
-            pool.map(f, map_parameters)
+
+        print('Running load on CPU')
+        print('Utilizing %d core' %processes)
+        map_parameters = range(processes) 
+        pool = Pool(processes)
+        pool.map(f, map_parameters)
+
     except KeyboardInterrupt:
         print("Programm has been stoped")
 
-def cpu_eat_one():
-    try:
-        p = mp.Process(target=f, args=("x"))
-        # p.daemon  = True
-        p.start()
-        time.sleep(10000000)
-        p.join()
-    except KeyboardInterrupt:
-        print("Programm has been stoped")
 
 if __name__ == '__main__':
-#    cpu_eat_one()
-    cpu_eat_all()
+    cpu_eat_all(3)
