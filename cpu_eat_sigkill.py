@@ -8,15 +8,16 @@ import logging
 def f(x):
     try:
         while True:
-            99999999 * 99999999
+            x ** x
+            x = x + 99999
+            print x
     except KeyboardInterrupt:
         print("")
-        print("-" * 24)
+#        print("-" * 24)
 
 
 
 def cpu_eat_all(x):
-
     try:
         if x == 1:
             processes = 1
