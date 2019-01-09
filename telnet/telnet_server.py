@@ -23,18 +23,11 @@ class EchoRequestHandler(SocketServer.StreamRequestHandler):
             line = self.rfile.readline()
             if not line: 
                 break
-            #print "%s wrote: %s" % (self.client_address[0], line.rstrip())
-            #self.wfile.write(line)
-            #os.system(line.rstrip())
-            if line.rstrip() == "kill":
-                flag['kill'] = 0
-                print(flag)
-            elif line.rstrip() == "live":
-                flag['live'] = 0
-                print(flag)
+            flag[line.rstrip()] = 0
+            print(flag)
+            if 'kill' in flag:
+                print('Ku')
 
-            else:
-                os.system(line.rstrip())
         print "%s disconnected" % self.client_address[0]
 
 # Create the server
@@ -45,5 +38,3 @@ server = EchoServer((HOST, PORT), EchoRequestHandler)
 print "server listening on %s:%s" % server.server_address
 server.serve_forever()
 
-if 'kill' in flag:
-    print('Ku')
